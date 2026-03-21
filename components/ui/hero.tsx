@@ -163,8 +163,8 @@ export default function Hero() {
               className="flex flex-wrap gap-2 mb-4 sm:mb-5">
               <a href="https://www.upwork.com/freelancers/~01bafdc31150747334"
                 target="_blank" rel="noopener"
-                className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-green-500/10 border border-green-500/25 text-green-400 text-xs font-medium hover:bg-green-500/20 transition-colors">
-                <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
+                className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-pink-500/15 border border-pink-500/30 text-pink-400 text-xs font-medium hover:bg-pink-500/25 transition-colors">
+                <span className="w-1.5 h-1.5 rounded-full bg-pink-400 animate-pulse" />
                 Top Rated Plus
               </a>
               <span className="inline-flex items-center px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/25 text-blue-400 text-xs font-medium">Expert Vetted</span>
