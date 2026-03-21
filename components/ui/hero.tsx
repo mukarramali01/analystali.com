@@ -48,56 +48,58 @@ export default function Hero() {
     if (!canvas) return;
     const ctx = canvas.getContext("2d")!;
     let raf: number;
-    const mouse = { x: null as number | null, y: null as number | null, radius: 180 };
 
-    class Particle {
-      x: number; y: number; dx: number; dy: number; size: number;
-      constructor(w: number, h: number) {
-        this.size = Math.random() * 1.4 + 0.4;
-        this.x = Math.random() * w;
-        this.y = Math.random() * h;
-        this.dx = (Math.random() - 0.5) * 0.3;
-        this.dy = (Math.random() - 0.5) * 0.3;
-      }
-      update(w: number, h: number) {
-        if (this.x > w || this.x < 0) this.dx *= -1;
-        if (this.y > h || this.y < 0) this.dy *= -1;
-        if (mouse.x !== null && mouse.y !== null) {
-          const dx = mouse.x - this.x, dy = mouse.y - this.y;
-          const dist = Math.sqrt(dx * dx + dy * dy);
-          if (dist < mouse.radius + this.size) {
-            const f = (mouse.radius - dist) / mouse.radius;
-            this.x -= (dx / dist) * f * 4;
-            this.y -= (dy / dist) * f * 4;
-          }
-        }
-        this.x += this.dx; this.y += this.dy;
+    const MAX_DIST = 300;
+    const PARTICLE_COLOR = "63, 185, 80";   // keep your green
+
+    interface P {
+      x: number; y: number;
+      dx: number; dy: number;
+      size: number;
+    }
+
+    let particles: P[] = [];
+
+    function init(w: number, h: number) {
+      // ~55 particles across the canvas — same density as AetherFlow
+      const count = Math.max(40, Math.floor((w * h) / 14000));
+      particles = Array.from({ length: count }, () => ({
+        x: Math.random() * w,
+        y: Math.random() * h,
+        dx: (Math.random() - 0.5) * 0.6,
+        dy: (Math.random() - 0.5) * 0.6,
+        size: Math.random() * 1.5 + 1.2,   // 1.2–2.7 px
+      }));
+    }
+
+    function draw(w: number, h: number) {
+      // Hard clear — no motion-blur trail (AetherFlow style)
+      ctx.clearRect(0, 0, w, h);
+
+      // Update + draw dots
+      for (const p of particles) {
+        p.x += p.dx;
+        p.y += p.dy;
+        if (p.x < 0 || p.x > w) p.dx *= -1;
+        if (p.y < 0 || p.y > h) p.dy *= -1;
+
         ctx.beginPath();
-        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-        ctx.fillStyle = "rgba(63,185,80,0.7)";
+        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(${PARTICLE_COLOR}, 0.85)`;
         ctx.fill();
       }
-    }
 
-    let particles: Particle[] = [];
-
-    function init() {
-      particles = [];
-      const n = Math.floor((canvas.width * canvas.height) / 11000);
-      for (let i = 0; i < n; i++) particles.push(new Particle(canvas.width, canvas.height));
-    }
-
-    function connect() {
+      // Draw connections — all pairs within MAX_DIST
       for (let a = 0; a < particles.length; a++) {
         for (let b = a + 1; b < particles.length; b++) {
           const dx = particles[a].x - particles[b].x;
           const dy = particles[a].y - particles[b].y;
-          const d2 = dx * dx + dy * dy;
-          const thresh = (canvas.width / 7) * (canvas.height / 7);
-          if (d2 < thresh) {
-            const op = (1 - d2 / thresh) * 0.22;
-            ctx.strokeStyle = `rgba(63,185,80,${op})`;
-            ctx.lineWidth = 0.6;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < MAX_DIST) {
+            // Opacity fades linearly with distance
+            const opacity = (1 - dist / MAX_DIST) * 0.55;
+            ctx.strokeStyle = `rgba(${PARTICLE_COLOR}, ${opacity})`;
+            ctx.lineWidth = 1;
             ctx.beginPath();
             ctx.moveTo(particles[a].x, particles[a].y);
             ctx.lineTo(particles[b].x, particles[b].y);
@@ -105,31 +107,23 @@ export default function Hero() {
           }
         }
       }
+
+      raf = requestAnimationFrame(() => draw(w, h));
     }
 
-    function animate() {
-      raf = requestAnimationFrame(animate);
-      const w = canvas.width, h = canvas.height;
-      ctx.fillStyle = "rgba(13,17,23,0.22)";
-      ctx.fillRect(0, 0, w, h);
-      particles.forEach(p => p.update(w, h));
-      connect();
-    }
+    const resize = () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      init(canvas.width, canvas.height);
+    };
 
-    const resize = () => { canvas.width = window.innerWidth; canvas.height = window.innerHeight; init(); };
-    const onMove = (e: MouseEvent) => { mouse.x = e.clientX; mouse.y = e.clientY; };
-    const onOut = () => { mouse.x = null; mouse.y = null; };
+    resize();
+    draw(canvas.width, canvas.height);
 
     window.addEventListener("resize", resize);
-    window.addEventListener("mousemove", onMove);
-    window.addEventListener("mouseout", onOut);
-    resize(); animate();
-
     return () => {
       cancelAnimationFrame(raf);
       window.removeEventListener("resize", resize);
-      window.removeEventListener("mousemove", onMove);
-      window.removeEventListener("mouseout", onOut);
     };
   }, []);
 
@@ -216,7 +210,7 @@ export default function Hero() {
             </motion.div>
           </div>
 
-        </div>
+                </div>
       </div>
     </section>
   );
