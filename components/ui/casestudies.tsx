@@ -60,7 +60,7 @@ export default function CaseStudies() {
   const inView = useInView(ref, { once: true, margin: "-80px" });
   return (
     <section id="work" className="py-32 bg-[#0d1117] border-t border-white/[0.05]">
-      <div className="max-w-6xl mx-auto px-8 lg:px-16">
+      <div className="max-w-6xl mx-auto px-5 sm:px-8 lg:px-16">
         <motion.div ref={ref} initial={{ opacity: 0, y: 24 }} animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }} className="mb-20">
           <p className="font-mono text-xs tracking-widest text-green-400 uppercase mb-3">Case Studies</p>

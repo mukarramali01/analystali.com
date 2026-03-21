@@ -15,7 +15,7 @@ export default function Process() {
 
   return (
     <section id="process" className="py-32 bg-[#0d1117] border-t border-white/[0.05]">
-      <div className="max-w-6xl mx-auto px-8 lg:px-16">
+      <div className="max-w-6xl mx-auto px-5 sm:px-8 lg:px-16">
         <motion.div ref={ref} initial={{ opacity: 0, y: 24 }} animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }} className="mb-20">
           <p className="font-mono text-xs tracking-widest text-green-400 uppercase mb-3">Methodology</p>
@@ -23,7 +23,7 @@ export default function Process() {
           <p className="text-[#8b949e] text-lg leading-relaxed">No guesswork. A battle-tested process refined across 500+ dashboard builds.</p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-0 border border-white/[0.06] rounded-2xl overflow-hidden">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-0 border border-white/[0.06] rounded-2xl overflow-hidden">
           {steps.map((s, i) => {
             const stepRef = React.useRef(null);
             const stepInView = useInView(stepRef, { once: true, margin: "-40px" });
@@ -34,7 +34,7 @@ export default function Process() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={stepInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.55, delay: i * 0.1 }}
-                className="p-8 border-r last:border-r-0 border-white/[0.06] bg-[#161b22] hover:bg-[#1c2128] transition-colors"
+                className="p-8 border-b sm:border-b-0 sm:border-r last:border-b-0 border-white/[0.06] bg-[#161b22] hover:bg-[#1c2128] transition-colors"
               >
                 <div className="font-mono text-3xl font-bold text-white/10 mb-6">{s.num}</div>
                 <h4 className="text-base font-semibold text-white mb-3">{s.title}</h4>

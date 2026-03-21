@@ -137,75 +137,15 @@ export default function Hero() {
     <section className="relative min-h-screen overflow-hidden bg-[#0d1117]">
       <canvas ref={canvasRef} className="absolute inset-0 w-full h-full" />
 
-      <div className="relative z-10 max-w-6xl mx-auto px-6 lg:px-16 pt-24 pb-16">
-        <div className="grid grid-cols-1 lg:grid-cols-[1fr_360px] gap-10 lg:gap-16 items-center">
+      <div className="relative z-10 max-w-6xl mx-auto px-5 sm:px-8 lg:px-16 pt-20 sm:pt-24 pb-16">
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr_360px] gap-8 lg:gap-16 items-center">
 
-          {/* LEFT */}
-          <div className="order-2 lg:order-1">
-            <motion.div custom={0} variants={fadeUp} initial="hidden" animate="visible"
-              className="flex flex-wrap gap-2 mb-5">
-              <a href="https://www.upwork.com/freelancers/~01bafdc31150747334"
-                target="_blank" rel="noopener"
-                className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-green-500/10 border border-green-500/25 text-green-400 text-xs font-medium hover:bg-green-500/20 transition-colors">
-                <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
-                Top Rated Plus
-              </a>
-              <span className="inline-flex items-center px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/25 text-blue-400 text-xs font-medium">Expert Vetted</span>
-              <span className="inline-flex items-center px-3 py-1 rounded-full bg-yellow-500/10 border border-yellow-500/25 text-yellow-400 text-xs font-medium">100% Job Success</span>
-            </motion.div>
-
-            <motion.p custom={1} variants={fadeUp} initial="hidden" animate="visible"
-              className="font-mono text-xs tracking-widest text-green-400 uppercase mb-5">
-              Senior Power BI Architect & Analytics Engineer
-            </motion.p>
-
-            <motion.h1 custom={2} variants={fadeUp} initial="hidden" animate="visible"
-              className="text-5xl lg:text-7xl xl:text-8xl font-bold tracking-tight leading-none mb-6">
-              <span className="text-white">Mukarram</span><br />
-              <span className="bg-gradient-to-r from-green-400 to-blue-400 bg-clip-text text-transparent">Ali</span>
-            </motion.h1>
-
-            <motion.p custom={3} variants={fadeUp} initial="hidden" animate="visible"
-              className="text-[#8b949e] text-base lg:text-lg leading-relaxed max-w-lg mb-8">
-              I architect enterprise-grade Power BI systems that transform raw data into revenue.
-              500+ dashboards built. Fortune 500 to high-growth startups. If your data isn&apos;t
-              driving decisions, you&apos;re leaving money on the table.
-            </motion.p>
-
-            <motion.div custom={4} variants={fadeUp} initial="hidden" animate="visible"
-              className="flex flex-col sm:flex-row gap-3 mb-10">
-              <a href="https://calendly.com/mir-ali-vizwise/30min" target="_blank" rel="noopener"
-                className="inline-flex items-center justify-center gap-2 px-7 py-3.5 bg-green-500 text-black font-semibold rounded-lg hover:bg-green-400 transition-colors text-sm">
-                Book a Consultation <ArrowRight className="w-4 h-4" />
-              </a>
-              <a href="#work"
-                className="inline-flex items-center justify-center gap-2 px-7 py-3.5 border border-white/15 text-white rounded-lg hover:bg-white/5 transition-colors text-sm">
-                View Case Studies <ExternalLink className="w-4 h-4" />
-              </a>
-            </motion.div>
-
-            <motion.div custom={5} variants={fadeUp} initial="hidden" animate="visible"
-              className="flex gap-4 lg:gap-10 pt-6 border-t border-white/[0.06]">
-              {[
-                { num: c1, suffix: "+", label: "Dashboards Shipped" },
-                { num: c2, suffix: "%", label: "Job Success" },
-                { num: c3, suffix: "+ yrs", label: "Experience" },
-              ].map(s => (
-                <div key={s.label}>
-                  <div className="text-xl lg:text-3xl font-bold text-white font-mono tabular-nums whitespace-nowrap">{s.num.toLocaleString()}{s.suffix}</div>
-                  <div className="text-xs lg:text-sm text-[#8b949e] mt-1">{s.label}</div>
-                </div>
-              ))}
-            </motion.div>
-          </div>
-
-          {/* RIGHT — photo */}
-          <motion.div custom={3} variants={fadeUp} initial="hidden" animate="visible"
-            className="order-1 lg:order-2 flex justify-center items-center">
-            <div className="relative w-48 h-48 sm:w-60 sm:h-60 lg:w-80 lg:h-80">
-              {/* subtle glow behind photo */}
-              <div className="absolute inset-[-20px] rounded-full bg-green-500/10 blur-3xl" />
-              <div className="relative w-full h-full rounded-full overflow-hidden border border-green-500/20">
+          {/* PHOTO — first on mobile (top center), right column on desktop */}
+          <motion.div custom={0} variants={fadeUp} initial="hidden" animate="visible"
+            className="order-1 lg:order-2 flex justify-center items-center pt-4 lg:pt-0">
+            <div className="relative w-40 h-40 sm:w-56 sm:h-56 lg:w-80 lg:h-80">
+              <div className="absolute inset-[-16px] rounded-full bg-green-500/10 blur-3xl" />
+              <div className="relative w-full h-full rounded-full overflow-hidden border-2 border-green-500/25 shadow-xl shadow-green-500/10">
                 <Image
                   src="/profile.jpeg"
                   alt="Mukarram Ali"
@@ -216,6 +156,66 @@ export default function Hero() {
               </div>
             </div>
           </motion.div>
+
+          {/* TEXT — second on mobile (below photo), left column on desktop */}
+          <div className="order-2 lg:order-1">
+            <motion.div custom={1} variants={fadeUp} initial="hidden" animate="visible"
+              className="flex flex-wrap gap-2 mb-4 sm:mb-5">
+              <a href="https://www.upwork.com/freelancers/~01bafdc31150747334"
+                target="_blank" rel="noopener"
+                className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-green-500/10 border border-green-500/25 text-green-400 text-xs font-medium hover:bg-green-500/20 transition-colors">
+                <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
+                Top Rated Plus
+              </a>
+              <span className="inline-flex items-center px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/25 text-blue-400 text-xs font-medium">Expert Vetted</span>
+              <span className="inline-flex items-center px-3 py-1 rounded-full bg-yellow-500/10 border border-yellow-500/25 text-yellow-400 text-xs font-medium">100% Job Success</span>
+            </motion.div>
+
+            <motion.p custom={2} variants={fadeUp} initial="hidden" animate="visible"
+              className="font-mono text-[10px] sm:text-xs tracking-widest text-green-400 uppercase mb-3 sm:mb-5">
+              Senior Power BI Architect & Analytics Engineer
+            </motion.p>
+
+            <motion.h1 custom={3} variants={fadeUp} initial="hidden" animate="visible"
+              className="text-4xl sm:text-6xl lg:text-7xl xl:text-8xl font-bold tracking-tight leading-none mb-4 sm:mb-6">
+              <span className="text-white">Mukarram</span><br />
+              <span className="bg-gradient-to-r from-green-400 to-blue-400 bg-clip-text text-transparent">Ali</span>
+            </motion.h1>
+
+            <motion.p custom={4} variants={fadeUp} initial="hidden" animate="visible"
+              className="text-[#8b949e] text-sm sm:text-base lg:text-lg leading-relaxed max-w-lg mb-6 sm:mb-8">
+              I architect enterprise-grade Power BI systems that transform raw data into revenue.
+              500+ dashboards built. Fortune 500 to high-growth startups. If your data isn&apos;t
+              driving decisions, you&apos;re leaving money on the table.
+            </motion.p>
+
+            <motion.div custom={5} variants={fadeUp} initial="hidden" animate="visible"
+              className="flex flex-col sm:flex-row gap-3 mb-8 sm:mb-10">
+              <a href="https://calendly.com/mir-ali-vizwise/30min" target="_blank" rel="noopener"
+                className="inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-green-500 text-black font-semibold rounded-lg hover:bg-green-400 transition-colors text-sm">
+                Book a Consultation <ArrowRight className="w-4 h-4" />
+              </a>
+              <a href="#work"
+                className="inline-flex items-center justify-center gap-2 px-6 py-3.5 border border-white/15 text-white rounded-lg hover:bg-white/5 transition-colors text-sm">
+                View Case Studies <ExternalLink className="w-4 h-4" />
+              </a>
+            </motion.div>
+
+            <motion.div custom={6} variants={fadeUp} initial="hidden" animate="visible"
+              className="flex gap-6 sm:gap-10 pt-6 border-t border-white/[0.06]">
+              {[
+                { num: c1, suffix: "+", label: "Dashboards" },
+                { num: c2, suffix: "%", label: "Job Success" },
+                { num: c3, suffix: "+ yrs", label: "Experience" },
+              ].map(s => (
+                <div key={s.label}>
+                  <div className="text-2xl sm:text-3xl font-bold text-white font-mono tabular-nums whitespace-nowrap">{s.num.toLocaleString()}{s.suffix}</div>
+                  <div className="text-xs text-[#8b949e] mt-1">{s.label}</div>
+                </div>
+              ))}
+            </motion.div>
+          </div>
+
         </div>
       </div>
     </section>

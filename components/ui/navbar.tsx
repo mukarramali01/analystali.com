@@ -39,7 +39,7 @@ export default function Navbar() {
         transition={{ duration: 0.3 }}
         className="fixed top-0 left-0 right-0 z-50 backdrop-blur-xl bg-[rgba(8,9,13,0.8)] border-b border-white/[0.05]"
       >
-        <div className="max-w-6xl mx-auto px-8 lg:px-16 py-4 flex items-center justify-between">
+        <div className="max-w-6xl mx-auto px-5 sm:px-8 lg:px-16 py-4 flex items-center justify-between">
           <div className="flex items-center gap-2 font-bold text-sm tracking-widest uppercase text-white">
             <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
             Mukarram Ali
