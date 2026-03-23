@@ -49,8 +49,8 @@ export default function Hero() {
     const ctx = canvas.getContext("2d")!;
     let raf: number;
 
-    const MAX_DIST = 300;
-    const PARTICLE_COLOR = "63, 185, 80";   // keep your green
+    const isMobile = () => window.innerWidth < 768;
+    const PARTICLE_COLOR = "63, 185, 80";
 
     interface P {
       x: number; y: number;
@@ -61,14 +61,14 @@ export default function Hero() {
     let particles: P[] = [];
 
     function init(w: number, h: number) {
-      // ~55 particles across the canvas — same density as AetherFlow
-      const count = Math.max(40, Math.floor((w * h) / 14000));
-      particles = Array.from({ length: count }, () => ({
+      const mobile = isMobile();
+      const MAX_COUNT = mobile ? 18 : Math.max(40, Math.floor((w * h) / 14000));
+      particles = Array.from({ length: MAX_COUNT }, () => ({
         x: Math.random() * w,
         y: Math.random() * h,
-        dx: (Math.random() - 0.5) * 0.6,
-        dy: (Math.random() - 0.5) * 0.6,
-        size: Math.random() * 1.5 + 1.2,   // 1.2–2.7 px
+        dx: (Math.random() - 0.5) * (mobile ? 0.3 : 0.6),
+        dy: (Math.random() - 0.5) * (mobile ? 0.3 : 0.6),
+        size: Math.random() * 1.2 + 0.8,
       }));
     }
 
@@ -90,16 +90,16 @@ export default function Hero() {
       }
 
       // Draw connections — all pairs within MAX_DIST
+      const MAX_DIST = isMobile() ? 140 : 300;
       for (let a = 0; a < particles.length; a++) {
         for (let b = a + 1; b < particles.length; b++) {
           const dx = particles[a].x - particles[b].x;
           const dy = particles[a].y - particles[b].y;
           const dist = Math.sqrt(dx * dx + dy * dy);
           if (dist < MAX_DIST) {
-            // Opacity fades linearly with distance
-            const opacity = (1 - dist / MAX_DIST) * 0.55;
+            const opacity = (1 - dist / MAX_DIST) * 0.45;
             ctx.strokeStyle = `rgba(${PARTICLE_COLOR}, ${opacity})`;
-            ctx.lineWidth = 1;
+            ctx.lineWidth = 0.8;
             ctx.beginPath();
             ctx.moveTo(particles[a].x, particles[a].y);
             ctx.lineTo(particles[b].x, particles[b].y);

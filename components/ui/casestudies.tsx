@@ -5,6 +5,8 @@ import React from "react";
 const cases = [
   {
     industry: "Modernization",
+    client: "Naturopathica",
+    location: "Los Angeles, USA",
     title: "Enterprise Migration: Tableau → Power BI at Scale",
     rating: "5.0",
     desc1: "Migrated 20+ interconnected Tableau dashboards to Power BI for a distributed e-commerce retail company. Managed complex dependencies and zero-downtime transition without business disruption.",
@@ -13,6 +15,8 @@ const cases = [
   },
   {
     industry: "Human Resources",
+    client: "Hirsch Law Group",
+    location: "Philadelphia, USA",
     title: "Workforce Analytics from Zero: Staffing & Operations Intelligence",
     rating: "5.0",
     desc1: "Built first-ever centralized analytics system for professional services firm. Unified employee data, call center metrics, and marketing performance from scattered HR, operations, and campaign systems.",
@@ -21,6 +25,8 @@ const cases = [
   },
   {
     industry: "Logistics & Supply Chain",
+    client: "Uptime Ops",
+    location: "Miami, USA",
     title: "Predictive Inventory Intelligence: 3-Source Integration & Forecasting",
     rating: "5.0",
     desc1: "Connected 3 disparate systems (Katana inventory, ShipHero & ShipStation shipping) for 3PL provider managing multi-location fulfillment. Created unified view answering: 'When do we run out of stock? How many units to reorder?'",
@@ -29,6 +35,8 @@ const cases = [
   },
   {
     industry: "SaaS & Sales",
+    client: "Qarma",
+    location: "Denmark",
     title: "Sales Intelligence Platform: Spreadsheets → Real-Time Decisions",
     rating: "5.0",
     desc1: "Transformed B2B SaaS company from 3+ day manual Excel reporting to real-time Power BI dashboards. Integrated HubSpot CRM data with daily automated refresh, enabled sales and leadership teams to see pipeline, performance, and upsell opportunities instantly.",
@@ -37,6 +45,8 @@ const cases = [
   },
   {
     industry: "B2B Wholesale",
+    client: "Haydn",
+    location: "New Zealand",
     title: "Commercial Intelligence: Churn Prediction & Sales Opportunity Engine",
     rating: "5.0",
     desc1: "Built advanced analytics platform for wholesale company losing revenue visibility. Converted dormant ERP transaction data into commercial intelligence showing: Which customers at risk of churning? Where are untapped sales opportunities?",
@@ -58,7 +68,9 @@ function CaseCard({ c, i }: { c: typeof cases[0]; i: number }) {
     >
       <div>
         <p className="font-mono text-[10px] tracking-widest uppercase text-green-400 mb-2">{c.industry}</p>
-        <h3 className="text-lg font-semibold text-white mb-4 leading-snug">{c.title}</h3>
+        <h3 className="text-lg font-semibold text-white mb-3 leading-snug">{c.title}</h3>
+        <p className="text-white text-sm font-semibold mb-0.5">{c.client}</p>
+        <p className="text-[#484f58] text-xs font-mono mb-3">{c.location}</p>
         <div className="flex items-center gap-1.5">
           <span className="text-yellow-400 text-sm">★★★★★</span>
           <span className="text-[#8b949e] text-xs font-mono">{c.rating}</span>
