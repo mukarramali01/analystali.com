@@ -1,34 +1,130 @@
 @import "tailwindcss";
 
 :root {
-  --background: #0d1117;
-  --foreground: #e6edf3;
+  --bg: #f4f1ea;
+  --surface: #fbfaf6;
+  --ink: #16150f;
+  --muted: #6b675c;
+  --line: rgba(22, 21, 15, 0.1);
+  --line-strong: rgba(22, 21, 15, 0.18);
+  --accent: #1e4d3b;
+  --accent-ink: #f4f1ea;
+  --accent-soft: #dfe8e0;
+  --accent-inv: #8fd1ad;
+  --signal: #b9521d;
+  --shadow: 0 1px 1px rgba(22, 21, 15, 0.03), 0 12px 40px -12px rgba(22, 21, 15, 0.12);
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0e0e0c;
+    --surface: #171714;
+    --ink: #edeae2;
+    --muted: #9c978b;
+    --line: rgba(237, 234, 226, 0.09);
+    --line-strong: rgba(237, 234, 226, 0.16);
+    --accent: #8fd1ad;
+    --accent-ink: #0e0e0c;
+    --accent-soft: #1a2a21;
+    --accent-inv: #1e4d3b;
+    --signal: #ec8b55;
+    --shadow: 0 1px 1px rgba(0, 0, 0, 0.2), 0 12px 40px -12px rgba(0, 0, 0, 0.5);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0e0e0c;
+  --surface: #171714;
+  --ink: #edeae2;
+  --muted: #9c978b;
+  --line: rgba(237, 234, 226, 0.09);
+  --line-strong: rgba(237, 234, 226, 0.16);
+  --accent: #8fd1ad;
+  --accent-ink: #0e0e0c;
+  --accent-soft: #1a2a21;
+  --accent-inv: #1e4d3b;
+  --signal: #ec8b55;
+  --shadow: 0 1px 1px rgba(0, 0, 0, 0.2), 0 12px 40px -12px rgba(0, 0, 0, 0.5);
+  color-scheme: dark;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
+  --color-accent: var(--accent);
+  --color-accent-ink: var(--accent-ink);
+  --color-accent-soft: var(--accent-soft);
+  --color-accent-inv: var(--accent-inv);
+  --color-signal: var(--signal);
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
+  --font-serif: var(--font-serif-display), ui-serif, Georgia, serif;
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-spring: cubic-bezier(0.32, 0.72, 0, 1);
 }
 
 @layer base {
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-
-  html { scroll-behavior: smooth; }
-
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 6rem;
+  }
   body {
-    background: #0d1117;
-    color: #e6edf3;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
-    overflow-x: hidden;
+    text-rendering: optimizeLegibility;
+    overflow-x: clip;
+  }
+  ::selection {
+    background: var(--accent);
+    color: var(--accent-ink);
+  }
+  :focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 6px;
   }
 }
 
-@keyframes marquee {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
+/* Film grain, fixed and non-interactive */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 60;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
+/* Scroll reveal: hidden only when the inline script is running; it animates each element in via the Web Animations API */
+.js .reveal {
+  opacity: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .animate-marquee, .animate-bar { animation: none !important; }
+}
+
+@keyframes marquee {
+  to { transform: translateX(-50%); }
+}
 .animate-marquee {
-  animation: marquee 30s linear infinite;
+  animation: marquee 40s linear infinite;
+}
+
+@keyframes bar {
+  from { transform: scaleX(0); }
+}
+.animate-bar {
+  transform-origin: left;
+  animation: bar 1.4s var(--ease-out-expo) both;
+  animation-delay: var(--d, 0ms);
 }

@@ -1,0 +1,20 @@
+# Mukarram Ali (Mir Ali)
+
+> Chicago-based analytics engineer and business systems consultant. Builds Power BI and Tableau dashboards, data pipelines, workflow automation, AI data assistants (MCP) and custom internal tools for operations-heavy businesses without an in-house data team. Upwork Top Rated and Expert Vetted; 61 engagements and 500+ dashboards delivered. Leads delivery at VizWise Analytics.
+
+Contact: mir.ali@vizwise.com · Book a call: https://calendly.com/mir-ali-vizwise/30min · Upwork: https://www.upwork.com/freelancers/~01bafdc31150747334
+
+## Case studies
+
+- [Predicting stockouts for a multi-location 3PL](https://analystali.com/work/3pl-inventory-intelligence): Katana + ShipHero + ShipStation unified; inventory runway and reorder forecasting in Power BI.
+- [Churn and opportunity engine for a B2B wholesaler](https://analystali.com/work/wholesale-churn-opportunity-engine): customer health score and ranked upsell list from ERP data.
+- [Retail media scorecard across nine retail networks](https://analystali.com/work/retail-media-scorecard): 8-page Power BI product for a CPG agency, validated with 34,000+ automated checks.
+- [SaaS sales intelligence](https://analystali.com/work/saas-sales-intelligence): HubSpot to Power BI, weekly reporting from 10+ hours to under 2.
+- [Law firm workforce analytics](https://analystali.com/work/law-firm-workforce-analytics): staffing, call-center capacity and marketing ROI.
+- [Tableau to Power BI migration](https://analystali.com/work/tableau-to-power-bi-migration): 20+ dashboards moved with zero downtime.
+- [Custom CRM and POS for optical retail](https://analystali.com/work/optical-retail-crm): Next.js + Supabase web app in production.
+- [AI assistants over live business systems](https://analystali.com/work/ai-data-assistants): MCP servers for Katana inventory/MRP and Google Analytics 4.
+
+## Services
+
+Decision dashboards (Power BI, Tableau, Looker Studio); data pipelines and warehousing (SQL, Snowflake, Azure SQL, Postgres, REST APIs); workflow automation (Power Automate, Python); AI data assistants; custom internal tools (Next.js, Supabase, Appsmith); KPI and analytics strategy.
